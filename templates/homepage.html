@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}Pets{% endblock %}
+{% block content %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+    <a class="navbar-brand text-white" href="/add">Add a Pet</a></nav>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h1 class="display-1 text-center">Pets</h1>
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <th>Name</th>
+                    <th>Photo</th>
+                    <th>Available</th>
+                </thead>
+                <tbody>
+                    {% for pet in pets %}
+                    <tr>
+                        <td><a href="/pets/{{ pet.id }}">{{ pet.name }}</a></td>
+
+                        {% if pet.photo_url %}
+                        <td>
+                            <a href="/pets/{{ pet.id }}">
+                            <img src="{{ pet.photo_url }}" alt="{{ pet.name }}" class="w-100">
+                        </a>
+                        </td>
+                        {% else %}
+                        <td>No photo available</td>
+                        {% endif %}
+
+                        {% if pet.available %}
+                        <td class="text-success">True</td>
+                        {% else %}
+                        <td class="text-danger">False</td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
